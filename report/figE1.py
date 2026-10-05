@@ -1,0 +1,15 @@
+# рисунок для сводки: три панели по уже полученным числам (из отчётов wm_stein2, 3, 6)
+import numpy as np, matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
+plt.rcParams.update({'font.family':'DejaVu Serif','font.size':8,'mathtext.fontset':'dejavuserif','axes.spines.top':False,'axes.spines.right':False})
+fig,ax=plt.subplots(1,3,figsize=(7.4,2.5)); d=np.array([0,1,3.0])
+def eb(a,x,v,**k): v=np.array(v); a.errorbar(x,v[:,0],yerr=[v[:,0]-v[:,1],v[:,2]-v[:,0]],capsize=2.5,lw=1.1,ms=4,**k)
+base=[[0.039,0.029,0.051],[0.093,0.082,0.106],[0.132,0.117,0.147]]; post=[[0.031,0.018,0.046],[0.090,0.070,0.110],[0.125,0.102,0.152]]
+eb(ax[0],d-0.04,base,fmt='-o',color='k',label='baseline sessions, n = 52'); eb(ax[0],d+0.04,post,fmt='-o',color='0.55',label='post sessions, n = 22')
+eb(ax[0],[3.30],[[0.192,0.169,0.216]],fmt='s',color='#b9770e'); eb(ax[0],[3.42],[[0.198,0.158,0.237]],fmt='s',color='#e0b057',label='prediction (2)')
+eb(ax[0],[3.60],[[0.127,0.107,0.149]],fmt='^',color='#1e8449'); eb(ax[0],[3.72],[[0.121,0.089,0.159]],fmt='^',color='#7dcea0',label='prediction (1)')
+ax[0].set_xlabel('delay, s'); ax[0].set_ylabel('attraction coefficient λ'); ax[0].set_xlim(-0.3,4.0); ax[0].set_ylim(0,0.33); ax[0].legend(frameon=False,fontsize=6.3,loc='upper left',handletextpad=0.4,borderaxespad=0.2); ax[0].set_title('a',loc='left',fontsize=10,fontweight='bold')
+ax[1].plot(d-0.04,[3.2,3.0,3.1],'-o',color='k',ms=4,lw=1.1,label='baseline sessions'); eb(ax[1],d+0.04,[[3.4,2.1,4.7],[3.2,2.5,4.1],[3.3,2.6,4.1]],fmt='-o',color='0.55',label='post sessions')
+ax[1].set_ylim(0,5.5); ax[1].set_xlabel('delay, s'); ax[1].set_ylabel(r'λ(1 − λ)/V, $10^{-3}$ deg$^{-2}$'); ax[1].legend(frameon=False,fontsize=6.3,loc='lower right'); ax[1].set_title('b',loc='left',fontsize=10,fontweight='bold')
+x=np.array([0,1.0]); eb(ax[2],x-0.08,[[0.11,-0.39,0.56],[0.52,0.27,0.79]],fmt='o',color='k',label='pre sessions'); eb(ax[2],x+0.08,[[-0.13,-0.70,0.42],[0.45,0.23,0.67]],fmt='o',color='0.55',label='post sessions')
+ax[2].axhline(0,color='0.6',lw=0.6); ax[2].set_xticks([0,1]); ax[2].set_xticklabels(['first\nsecond','per second,\n1–3 s']); ax[2].set_xlim(-0.5,1.5); ax[2].set_ylabel('increment of $s_2$, deg'); ax[2].legend(frameon=False,fontsize=6.3,loc='lower right'); ax[2].set_title('c',loc='left',fontsize=10,fontweight='bold')
+fig.tight_layout(w_pad=1.2); fig.savefig('figE1.pdf'); print('ok')

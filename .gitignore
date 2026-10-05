@@ -1,0 +1,9 @@
+data/
+data_open/
+*_out/
+*_out_selftest*/
+__pycache__/
+*.pyc
+*.aux
+*.log
+*.out

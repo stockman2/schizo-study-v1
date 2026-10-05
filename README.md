@@ -93,5 +93,8 @@ The author ran all analyses, checked the results, and is responsible for the con
 ## License
 
 Code: MIT (see `LICENSE`). Report and figures: CC BY 4.0.
+<<<<<<< HEAD
 # schizo-study-v1
 # schizo-study-v1
+=======
+>>>>>>> bcf9f496fcc27aab281a1ebde372c79a4af0b85c
